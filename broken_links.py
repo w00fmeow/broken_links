@@ -36,7 +36,7 @@ class BrokenLinks():
         if len(list(set(self.bad_links))) == 0:
             print("No broken links was found")
         else:
-            print("Found {0} broken links: {1}".format(len(self.bad_links), self.bad_links))
+            print("Found {0} broken links".format(len(self.bad_links)))
 
     async def filtering(self, url):
         l = await self.extract_links(url)
