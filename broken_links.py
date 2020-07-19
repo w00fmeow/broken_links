@@ -18,6 +18,7 @@ class BrokenLinks():
             }
 
     async def proccess(self, url):
+        print("----------- {} -----------".format(self.domain.upper()))
         self.urls_patterns['base_domain'] = r'^(http|https)://.*{}.*$'.format(self.domain.lower())
         await self.get_session()
         self.links = await self.filtering(url)
@@ -88,5 +89,8 @@ if __name__ == '__main__':
         if protocol.group(1):
             b.protocol = protocol
             b.domain = re.search(b.urls_patterns["first_slash"],b.domain[len(protocol.group(1))+3:]).group(1)
+    else:
+        print("Please, specify domain in following format: 'http://www.example.com'")
+        sys.exit()
     loop = asyncio.get_event_loop()
     loop.run_until_complete(b.proccess(args.domain))
